@@ -51,3 +51,88 @@ Miss Reem knows that hypothesis testing is a statistical method used to make dec
 - **Collecting data** from experiments or observations.
 
 - **Analyzing the data** to determine whether the evidence is strong enough to reject the null hypothesis in favor of the alternative.
+
+## 📊 Two-Proportion Hypothesis Testing (A/B Experiment)
+
+Two Proportion Hypothesis Testing is used to determine if there is a statistically significant difference between the proportions of a certain characteristic (conversion rate) in two independent groups.
+
+**When to Use It:**
+
+- You have two independent samples (e.g., control vs. treatment).
+- Each sample yields a proportion (e.g., % of users who book flights).
+- You want to know if the difference in these proportions is due to chance.
+
+| Group | Description     |
+| ----- | --------------- |
+| A     | Control Group   |
+| B     | Treatment Group |
+| Null Hypothesis (H₀)     | Conversion Rate of Group B ≤ Conversion Rate of Group A   |
+| Alternative Hypothesis (H₁)     | Conversion Rate of Group B > Conversion Rate of Group A (one-tailed) |
+
+
+
+After defining the hypotheses, Miss Reem proceeds to design the experiment. For this she precisely calculate the **minimum sample size** needed to detect an effect size (uplift) with sufficient statistical **power** and **significance level**.
+
+---
+
+## 🧪 Designing the Experiment
+
+As a Data Scientist, Miss Reem makes careful decisions regarding:
+
+### ✅ A/B Test Design Checklist
+
+- **Define the Business Impact:**
+
+  - What uplift (e.g., +5% conversion) is meaningful to detect?
+
+- **Estimate Baseline (p₁):**
+
+  - Use historical data (last campaign, last month, etc.)
+
+- **Choose Acceptable α and Power:**
+
+  - Standard: α = 0.05, Power = 0.80
+
+- **Use Power Analysis Tool to get Minimum Sample Size:**
+
+  - `statsmodels.stats.power` in Python
+  - Online calculators like [Evan Miller's A/B Test Calculator](https://www.evanmiller.org/ab-testing/sample-size.html)
+
+### 🚨 Type I and Type II Errors
+
+| Error Type | Description                                        | Controlled by        | Example                        |
+| ---------- | -------------------------------------------------- | -------------------- | ------------------------------ |
+| Type I     | False positive — reject H₀ when it’s true          | Significance level α | You say B > A, but it’s not    |
+| Type II    | False negative — fail to reject H₀ when it’s false | Power = 1 − β        | You say B = A, but B is better |
+
+### 🛡️ How to Avoid:
+
+- Type I: Choose small α (e.g., 0.01 or 0.05)
+- Type II: Choose higher power (e.g., 0.90), increase sample size
+- Pre-registration: Fix α, power, and sample size before starting
+
+### 🧪 Summary Table
+
+| Term              | Meaning                                        |
+| ----------------- | ---------------------------------------------- |
+| Power             | Probability of detecting a true effect (1 - β) |
+| Type I Error (α)  | Rejecting a true null hypothesis               |
+| Type II Error (β) | Failing to reject a false null hypothesis      |
+| Effect Size       | Difference between p₁ and p₂                   |
+| Sample Size       | Larger sample → lower β → higher power         |
+
+### 🧮 Sample Size Formula (for One-Tailed Test)
+
+```math
+n = \left[ \frac{Z_{1−\alpha} \cdot \sqrt{2p(1−p)} + Z_{1−\beta} \cdot \sqrt{p_1(1−p_1) + p_2(1−p_2)} }{p_1 − p_2} \right]^2
+```
+
+Where:
+
+- \(p = \frac{p_1 + p_2}{2}\)
+- \(Z_{1−\alpha}, Z_{1−\beta}\) = critical z-values for significance level and power
+
+You can calculate this manually or using Python libraries.
+
+---
+
