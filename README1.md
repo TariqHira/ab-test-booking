@@ -151,19 +151,15 @@ The goal is either to **Reject the Null Hypothesis** if it's not true (related t
 
   **Sample size using raw proportions**
   **Formula (per group):**
-  \[
-    n = \frac{\left(Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)}\right)^2}{(p_1 - p_2)^2}
-    \]
+  \
+  \(n = \frac{\left(Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)}\right)^2}{(p_1 - p_2)^2}\)
     
     Where:
-    \[
-      p = \frac{p_1 + p_2}{2}
-      \]
+    \(p = \frac{p_1 + p_2}{2}\)
 
   **Sample size using Cohen’s h (standardized effect size)**
-  \[
-    n = \frac{h^2}{2} \cdot \left(Z_{1 - \alpha/2} + Z_{1 - \beta}\right)^2
-    \]
+  \
+  \(n = \frac{h^2}{2} \cdot \left(Z_{1 - \alpha/2} + Z_{1 - \beta}\right)^2\)
 
 ### why we choose one formula over the other
 When historical data exists → use raw proportions
