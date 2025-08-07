@@ -6,9 +6,9 @@
 
 ## 📌 Project Overview
 
-The **Flight Booking Team at MyTravel.com** has rolled out a new pricing strategy. To assess whether this strategy is actually increasing flight bookings — or if the observed change is simply due to chance — they've tasked **Miss Reem**, a **Data Scientist**, with designing and conducting a hypothesis test.
+The Flight Booking Team at MyTravel.com is planning to roll out a new pricing strategy and wants to test its impact before a full launch. To assess whether this strategy is actually increasing flight bookings — or if the observed change is simply due to chance — they've tasked **Miss Reem**, a **Data Scientist**, with designing and conducting a hypothesis test.
 
-Miss Reem's job is not just to crunch numbers, but to ensure the experiment is statistically as well as practically significant, the data is analyzed rigorously, and the results are interpreted in a way that guides strategic decisions.
+Miss Reem's job isn't just to crunch numbers; it's to ensure the experiment is statistically and practically significant, the data is analyzed rigorously, and the results are interpreted in a way that guides strategic decisions.
 
 This project takes you through a realistic workflow:
 
@@ -33,28 +33,42 @@ This project is designed for:
 
 ## 🧪 Why Hypothesis Testing?
 
-In any A/B test, the key question is:
+The key question in business often is:
 
-> “Is the observed improvement real or just random noise?”
+> "Is the observed improvement real or just random noise?"
+
+In business, we frequently want to validate if a new strategy truly creates an improvement. But natural variation makes this tricky — especially for proportions (e.g., booking conversion rates).
 
 That’s where **hypothesis testing** comes in.
 
+---
+
 ### 🔍 What is Hypothesis Testing?
 
-Miss Reem knows that hypothesis testing is a statistical method used to make decisions or inferences about population parameters based on sample data. The process involves:
+Miss Reem knows that it's impossible and impractical to run the experiment on the entire population. Instead, she can run an experiment on selected samples from the population. She's also well aware of the statistical method "hypothesis testing," which is used to make decisions or inferences about population parameters based on sample data. The process involves:
 
-- **Formulating two hypotheses:**
+1. **Formulating two hypotheses:**
 
-  - **Null Hypothesis (H₀):** Assumes no effect or no difference (e.g., "There is no difference in conversion rates between the control and treatment pages").
-  - **Alternative Hypothesis (H₁):** Assumes there is an effect or a difference (e.g., "The new pricing page increases conversions").
+   - **Null Hypothesis (H₀):** Assumes no effect or no difference (e.g., "There is no difference in conversion rates between the control and treatment pages").
+   - **Alternative Hypothesis (H₁):** Assumes there is an effect or a difference (e.g., "The new pricing page increases conversions").
 
-- **Collecting data** from experiments or observations.
+2. **Designing the experiment:** Estimating the sample size based on Minimum Detectable Effect (MDE), Power, and Significance.
 
-- **Analyzing the data** to determine whether the evidence is strong enough to reject the null hypothesis in favor of the alternative.
+3. **Collecting data** from experiments or observations.
+
+4. **Analyzing the data** to determine whether the evidence is strong enough to reject the null hypothesis in favor of the alternative.
+
+---
+
+### 🧪 What is A/B Experimentation?
+
+Miss Reem decides to implement an A/B test — a practical form of hypothesis testing. It compares two versions (A and B) of a feature by randomly splitting users and measuring which performs better on a defined metric (like conversion rate).
+
+---
 
 ## 📊 Two-Proportion Hypothesis Testing (A/B Experiment)
 
-Two Proportion Hypothesis Testing is used to determine if there is a statistically significant difference between the proportions of a certain characteristic (conversion rate) in two independent groups.
+Two-proportion hypothesis testing is used to determine if there is a statistically significant difference between the proportions of a certain characteristic (e.g., conversion rate) in two independent groups.
 
 **When to Use It:**
 
@@ -66,73 +80,160 @@ Two Proportion Hypothesis Testing is used to determine if there is a statistical
 | ----- | --------------- |
 | A     | Control Group   |
 | B     | Treatment Group |
-| Null Hypothesis (H₀)     | Conversion Rate of Group B ≤ Conversion Rate of Group A   |
-| Alternative Hypothesis (H₁)     | Conversion Rate of Group B > Conversion Rate of Group A (one-tailed) |
 
+**Null Hypothesis (H₀):** pA ≤ pB\
+**Alternative Hypothesis (H₁):** pA > pB (one-tailed)
 
+---
 
-After defining the hypotheses, Miss Reem proceeds to design the experiment. For this she precisely calculate the **minimum sample size** needed to detect an effect size (uplift) with sufficient statistical **power** and **significance level**.
+## 🌟 One-Tailed vs. Two-Tailed Tests
+
+The choice of a one-tailed or two-tailed alternative hypothesis is critical.
+
+- **One-Tailed Test (H₁: pₒ > pₑ):** This is used when you are only interested in detecting an effect in a specific direction. For example, if the new pricing strategy is only considered successful if it *increases* conversions, a one-tailed test is appropriate. It offers more statistical power to detect an effect in the specified direction. This means the rejection region for the null hypothesis is entirely in one tail of the sampling distribution.
+
+- **Two-Tailed Test (H₁: pₒ ≠ pₑ):** This is more common in exploratory A/B testing as it can detect a significant difference in *either* direction (increase or decrease). If you're unsure whether the new strategy might increase or decrease conversions, or if a decrease would also be an important finding, a two-tailed test is more suitable. The rejection region is split between both tails of the sampling distribution.
+
+In this project, a one-tailed test is chosen, implying that the team is primarily interested in detecting a positive uplift in conversion rates.
+
+---
+
+## 📜 Assumptions for Two-Proportion Z-Test
+
+To ensure valid results, the following assumptions must hold:
+
+- **Independence of observations** The outcomes for one user should not influence the outcomes for another user (via random assignment)
+- **Independent samples** (no overlap between control and treatment)
+- **Large enough sample sizes**: For the sampling distribution of the proportions to be approximately normal (Law of Large Numbers) - allowing the use of Z-scores - a common rule of thumb is at least 10 in each category
 
 ---
 
 ## 🧪 Designing the Experiment
 
-As a Data Scientist, Miss Reem makes careful decisions regarding:
+Miss Reem carefully considers the following:
 
 ### ✅ A/B Test Design Checklist
 
-- **Define the Business Impact:**
+- **Define Business Impact (Minimum Detectable Effect - MDE):**
 
-  - What uplift (e.g., +5% conversion) is meaningful to detect?
+  - What uplift (e.g., +5% conversion) is meaningful to detect? The MDE is not just a statistical parameter; it's a **business decision**. It represents the smallest change that would be considered financially or strategically worthwhile to implement. For instance, a 0.5% conversion uplift might be statistically significant but not justify the development and maintenance costs.
+  - **Calculating MDE:** If your baseline conversion rate (p1​) is known, and you define the MDE as a percentage *uplift* of that baseline, you can calculate p2​.
+    - If the MDE is given as an *absolute* difference (e.g., an absolute increase of 5 percentage points), then p2​=p1​+5% --> if p1 is 10 then p2 = 15% = 0.15
+    - If the MDE is given as a *relative* uplift of let's say 5% and p1 is 10% then p2 = 0.105 =10.5% \
 
-- **Estimate Baseline (p₁):**
 
-  - Use historical data (last campaign, last month, etc.)
+- **Estimate Baseline (**************************************************************************************************************************************************************************************************************************************************************************************************************************p\_1**************************************************************************************************************************************************************************************************************************************************************************************************************************):**
 
-- **Choose Acceptable α and Power:**
+  - Use historical data (last campaign, last month, etc.) to get an accurate estimate of the current conversion rate.
 
-  - Standard: α = 0.05, Power = 0.80
+- **Choose α** 
 
-- **Use Power Analysis Tool to get Minimum Sample Size:**
+  Confidence Interval — A **confidence interval** is a range of values that we're confident contains the **true effect** of what we're testing. The confidence level (e.g., 95%) indicates how likely it is that the interval contains the true population parameter. The significance level α is the complement of the confidence level (α = 1 − CI). For example, a 95% confidence level corresponds to α = 0.05. This α value represents the probability of making a **Type I error** — falsely rejecting the null hypothesis when it is actually true. that we’re confident contains the **true effect** of what we’re testing. **α** is (1- CI)
 
-  - `statsmodels.stats.power` in Python
-  - Online calculators like [Evan Miller's A/B Test Calculator](https://www.evanmiller.org/ab-testing/sample-size.html)
+- **Choose Power** 
 
-### 🚨 Type I and Type II Errors
+  Rejecting Null Hypothesis when it's False is power (here it's like rejecting that the conversion rate increased for the Treatment when it actually holds true for the entire population)
+
+The goal is either to **Reject the Null Hypothesis** if it's not true (related to the **Power** of a Test) or **Do Not Reject** it if it is, in fact, true, based on the test results. If the test is poorly designed, the results can be biased and lead to the following errors.
+
+## ⚖️ Type I and Type II Errors
 
 | Error Type | Description                                        | Controlled by        | Example                        |
 | ---------- | -------------------------------------------------- | -------------------- | ------------------------------ |
 | Type I     | False positive — reject H₀ when it’s true          | Significance level α | You say B > A, but it’s not    |
 | Type II    | False negative — fail to reject H₀ when it’s false | Power = 1 − β        | You say B = A, but B is better |
 
-### 🛡️ How to Avoid:
+###
 
-- Type I: Choose small α (e.g., 0.01 or 0.05)
-- Type II: Choose higher power (e.g., 0.90), increase sample size
-- Pre-registration: Fix α, power, and sample size before starting
+- **Calculate Minimum Sample Size:**
 
-### 🧪 Summary Table
+  Either through pooled statistics or through Cohen's d, Cohen's h
 
-| Term              | Meaning                                        |
-| ----------------- | ---------------------------------------------- |
-| Power             | Probability of detecting a true effect (1 - β) |
-| Type I Error (α)  | Rejecting a true null hypothesis               |
-| Type II Error (β) | Failing to reject a false null hypothesis      |
-| Effect Size       | Difference between p₁ and p₂                   |
-| Sample Size       | Larger sample → lower β → higher power         |
+  **Sample size using raw proportions**
+  **Formula (per group):**
+  \[
+    n = \frac{\left(Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)}\right)^2}{(p_1 - p_2)^2}
+    \]
+    
+    Where:
+    \[
+      p = \frac{p_1 + p_2}{2}
+      \]
 
-### 🧮 Sample Size Formula (for One-Tailed Test)
+  **Sample size using Cohen’s h (standardized effect size)**
+  \[
+    n = \frac{h^2}{2} \cdot \left(Z_{1 - \alpha/2} + Z_{1 - \beta}\right)^2
+    \]
 
-```math
-n = \left[ \frac{Z_{1−\alpha} \cdot \sqrt{2p(1−p)} + Z_{1−\beta} \cdot \sqrt{p_1(1−p_1) + p_2(1−p_2)} }{p_1 − p_2} \right]^2
-```
+### why we choose one formula over the other
+When historical data exists → use raw proportions
+When only effect size is known (e.g., small, medium, large), use Cohen’s h
 
-Where:
 
-- \(p = \frac{p_1 + p_2}{2}\)
-- \(Z_{1−\alpha}, Z_{1−\beta}\) = critical z-values for significance level and power
+- Why Cohen's Tranformation? \
+  A **5% absolute difference** in proportions can have **very different magnitudes of impact** depending on **where it lies on the probability scale**. That's **exactly why Cohen's h** was created — to **standardize** the effect size on a **non-linear probability scale**.
 
-You can calculate this manually or using Python libraries.
+## Why a 5% Difference Isn't Always Equal
+
+Let’s look at two examples:
+
+| Comparisonp1p2Absolute DifferenceCohen’s h (Standardized) |      |      |           |         |
+| --------------------------------------------------------- | ---- | ---- | --------- | ------- |
+| Small Baseline                                            | 0.10 | 0.15 | 0.05 (5%) | ≈ 0.148 |
+| Large Baseline                                            | 0.85 | 0.90 | 0.05 (5%) | ≈ 0.105 |
+
+➡️ Although the **absolute difference** is 5% in both cases, the **Cohen’s h** is **smaller** for the high baseline. Why?
+
+### 🔬 Because of the shape of the probability distribution:
+
+- A difference from 10% to 15% means a **50% relative increase** in conversion.
+- A difference from 85% to 90% is only **5.9% relative increase**.
+- Also, **variance is not uniform** across the 0–1 probability scale.
+
+> This **non-linearity** is captured by the **arcsin square root transformation** in Cohen's h.
 
 ---
+
+## 📊 Understanding Effect Size: Cohen's d and Cohen's h
+
+- **Cohen's d (for continuous data):**
+
+  **When to use:** Cohen's d is used when comparing the means of two groups on a **continuous variable** (e.g., average revenue per user, time spent on page). It expresses the difference between two means in terms of standard deviation units.
+
+  \
+  \(d = \frac{\bar{x}_1 - \bar{x}_2}{s_p}\)
+
+
+
+- **Cohen's h (for proportions):**
+
+  **When to use:** Cohen's h is specifically designed for comparing **two proportions**, which is highly relevant for A/B testing conversion rates. It's a measure of effect size that accounts for the non-linear nature of proportions by using an arcsine transformation.
+
+  \
+  \(h = 2 \cdot \left( \arcsin(\sqrt{p_1}) - \arcsin(\sqrt{p_2}) \right)\)
+
+**Interpretation (both):**
+
+- 0.2: Small effect
+- 0.5: Medium effect
+- 0.8: Large effect\
+
+  ## 📊 4. Relationship Between CI, Type I Error, and Power
+  | Concept What it tells youControlled by |                                       |                                 |
+  | -------------------------------------- | ------------------------------------- | ------------------------------- |
+  | **Confidence Interval**                | The range of the possible true effect | Sample size, variability, alpha |
+  | **Type I Error (α)**                   | Risk of a **false positive**          | Significance level (alpha)      |
+  | **Power (1 - β)**                      | Ability to detect a **true positive** | Sample size, effect size, alpha |
+
+---
+
+##
+
+##
+
+### 🛡️ How to Avoid Errors
+
+- Lower α to reduce Type I error (e.g., 0.01)
+- Increase power to reduce Type II error (e.g., 0.90)
+- Pre-register experiment design
 
