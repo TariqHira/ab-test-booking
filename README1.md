@@ -173,10 +173,10 @@ When only effect size is known (e.g., small, medium, large), use Cohen’s h
 
 Let’s look at two examples:
 
-| Comparisonp1p2Absolute DifferenceCohen’s h (Standardized) |      |      |           |         |
-| --------------------------------------------------------- | ---- | ---- | --------- | ------- |
-| Small Baseline                                            | 0.10 | 0.15 | 0.05 (5%) | ≈ 0.148 |
-| Large Baseline                                            | 0.85 | 0.90 | 0.05 (5%) | ≈ 0.105 |
+|     Comparison       |  p1  |  p2  | Absolute Difference |Cohen’s h (Standardized)|
+| ---------------------| ---- | ---- | --------------------| -----------------------|
+|   Small Baseline     | 0.10 | 0.15 |     0.05 (5%)       |          ≈ 0.148       |
+|   Large Baseline     | 0.85 | 0.90 |     0.05 (5%)       |          ≈ 0.105       |
 
 ➡️ Although the **absolute difference** is 5% in both cases, the **Cohen’s h** is **smaller** for the high baseline. Why?
 
@@ -215,7 +215,7 @@ Let’s look at two examples:
 - 0.8: Large effect\
 
   ## 📊 4. Relationship Between CI, Type I Error, and Power
-  | Concept What it tells youControlled by |                                       |                                 |
+  |             Concept                    |            What it tells              |          Controlled by          |
   | -------------------------------------- | ------------------------------------- | ------------------------------- |
   | **Confidence Interval**                | The range of the possible true effect | Sample size, variability, alpha |
   | **Type I Error (α)**                   | Risk of a **false positive**          | Significance level (alpha)      |
