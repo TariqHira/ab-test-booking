@@ -223,10 +223,6 @@ Let’s look at two examples:
 
 ---
 
-##
-
-##
-
 ### 🛡️ How to Avoid Errors
 
 - Lower α to reduce Type I error (e.g., 0.01)
