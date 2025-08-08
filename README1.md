@@ -174,15 +174,14 @@ The goal is either to **Reject the Null Hypothesis** if it's not true (related t
 
   **Sample size using raw proportions**
   **Formula (per group):**
-  \
-  \(n = \frac{\left(Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)}\right)^2}{(p_1 - p_2)^2}\)
-    
-    Where:
-    \(p = \frac{p_1 + p_2}{2}\)
+  `n = ((Z_(1-α/2) * sqrt(2 * p * (1 - p)) + Z_(1-β) * sqrt(p1 * (1 - p1) + p2 * (1 - p2)))²) / (p1 - p2)²`
+
+  Where:
+  - `p = (p1 + p2) / 2` (pooled proportion)
+
 
   **Sample size using Cohen’s h (standardized effect size)**
-  \
-  \(n = \frac{h^2}{2} \cdot \left(Z_{1 - \alpha/2} + Z_{1 - \beta}\right)^2\)
+  `h = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2)))`
 
 ### why we choose one formula over the other
 When historical data exists → use raw proportions
@@ -219,17 +218,14 @@ Let’s look at two examples:
 
   **When to use:** Cohen's d is used when comparing the means of two groups on a **continuous variable** (e.g., average revenue per user, time spent on page). It expresses the difference between two means in terms of standard deviation units.
 
-  \
-  \(d = \frac{\bar{x}_1 - \bar{x}_2}{s_p}\)
-
+  `d = (x̄₁ - x̄₂) / sₚ`
 
 
 - **Cohen's h (for proportions):**
 
   **When to use:** Cohen's h is specifically designed for comparing **two proportions**, which is highly relevant for A/B testing conversion rates. It's a measure of effect size that accounts for the non-linear nature of proportions by using an arcsine transformation.
 
-  \
-  \(h = 2 \cdot \left( \arcsin(\sqrt{p_1}) - \arcsin(\sqrt{p_2}) \right)\)
+  `h = 2 * (arcsin(sqrt(p₁)) - arcsin(sqrt(p₂)))`
 
 **Interpretation (both):**
 
