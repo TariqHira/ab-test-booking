@@ -115,9 +115,6 @@ To ensure valid results, the following assumptions must hold:
 | **T-Test**  | For small samples (`n < 30`) or unknown population variance |
 | **Chi-Square** | For categorical outcomes in contingency tables |
 
----
-
-Here’s the revised 4 key points with the correct standard error formula included:
 
 - In a two-proportion Z-test, the variance of a sample proportion is `p(1 - p) / n`, but since `p` is unknown, we estimate it using `p̂` (sample proportion).
 
