@@ -106,6 +106,29 @@ To ensure valid results, the following assumptions must hold:
 - **Independent samples** (no overlap between control and treatment)
 - **Large enough sample sizes**: For the sampling distribution of the proportions to be approximately normal (Law of Large Numbers) - allowing the use of Z-scores - a common rule of thumb is at least 10 in each category
 
+
+📐 **Choosing the Right Test: Z-Test vs T-Test**
+
+| Test Type   | When to Use |
+| ----------- | ----------- |
+| **Z-Test**  | For large samples (`n > 30`) and known/approximated variance |
+| **T-Test**  | For small samples (`n < 30`) or unknown population variance |
+| **Chi-Square** | For categorical outcomes in contingency tables |
+
+---
+
+Here’s the revised 4 key points with the correct standard error formula included:
+
+- In a two-proportion Z-test, the variance of a sample proportion is `p(1 - p) / n`, but since `p` is unknown, we estimate it using `p̂` (sample proportion).
+
+- The standard error of the difference in proportions is:  
+  `SE_(p̂1 - p̂2) = sqrt( (p̂1 * (1 - p̂1)) / n1  +  (p̂2 * (1 - p̂2)) / n2 )`  
+  This SE is reliable when the variance estimates from each group are *reasonably stable*.
+
+- Large sample sizes make these variance and SE estimates stable, allowing the normal approximation (Central Limit Theorem) to hold — making the Z-test valid.
+
+- With small samples, SE estimates are unstable, so Fisher’s Exact Test or a Chi-square test is preferred over a Z-test.
+
 ---
 
 ## 🧪 Designing the Experiment
