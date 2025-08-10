@@ -184,7 +184,7 @@ The goal is either to **Reject the Null Hypothesis** if it's not true (related t
   **Sample size using Cohen’s h (standardized effect size)**
   `h = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2)))`
 
-![Sample Size vs MDE](visuals/SampleSize_MDE_one_sided.png)
+![Sample Size vs MDE](visuals/SampleSize_vs_MDE_one_sided.png)
 
 
 ### why we choose one formula over the other
