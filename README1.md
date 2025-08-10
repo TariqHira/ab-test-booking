@@ -136,8 +136,10 @@ Miss Reem carefully considers the following:
 
 - **Define Business Impact (Minimum Detectable Effect - MDE):**
 
-  - What uplift (e.g., +5% conversion) is meaningful to detect? The MDE is not just a statistical parameter; it's a **business decision**. It represents the smallest change that would be considered financially or strategically worthwhile to implement. For instance, a 0.5% conversion uplift might be statistically significant but not justify the development and maintenance costs.
-  - **Calculating MDE:** If your baseline conversion rate (p1​) is known, and you define the MDE as a percentage *uplift* of that baseline, you can calculate p2​.
+  - What uplift (e.g., +5% conversion) is meaningful to detect? 
+  The MDE is not just a statistical parameter; it's a **business decision**. It represents the smallest change that would be considered financially or strategically worthwhile to implement. For instance, a 0.5% conversion uplift might be statistically significant but not justify the development and maintenance costs.
+  - **Calculating MDE:** 
+  If your baseline conversion rate (p1​) is known, and you define the MDE as a percentage *uplift* of that baseline, you can calculate p2​.
     - If the MDE is given as an *absolute* difference (e.g., an absolute increase of 5 percentage points), then p2​=p1​+5% --> if p1 is 10 then p2 = 15% = 0.15
     - If the MDE is given as a *relative* uplift of let's say 5% and p1 is 10% then p2 = 0.105 =10.5% \
 
@@ -155,6 +157,8 @@ Miss Reem carefully considers the following:
   Rejecting Null Hypothesis when it's False is power (here it's like rejecting that the conversion rate increased for the Treatment when it actually holds true for the entire population)
 
 The goal is either to **Reject the Null Hypothesis** if it's not true (related to the **Power** of a Test) or **Do Not Reject** it if it is, in fact, true, based on the test results. If the test is poorly designed, the results can be biased and lead to the following errors.
+
+![Power Curve](visuals/PowerCurve_one_sided.png)
 
 ## ⚖️ Type I and Type II Errors
 
@@ -179,6 +183,9 @@ The goal is either to **Reject the Null Hypothesis** if it's not true (related t
 
   **Sample size using Cohen’s h (standardized effect size)**
   `h = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2)))`
+
+![Sample Size vs MDE](visuals/SampleSize_MDE_one_sided.png)
+
 
 ### why we choose one formula over the other
 When historical data exists → use raw proportions
@@ -206,6 +213,8 @@ Let’s look at two examples:
 - Also, **variance is not uniform** across the 0–1 probability scale.
 
 > This **non-linearity** is captured by the **arcsin square root transformation** in Cohen's h.
+
+![Cohen's h vs Baseline at 5% Absolute MDE](visuals/CohensH_vs_Baseline_one_sided.png)
 
 ---
 
